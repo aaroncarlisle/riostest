@@ -13,6 +13,12 @@ class ToDoItem extends Model
       'item_text',
       'prev',
       'next',
-      'complete'
+      'complete',
+      'parent'
     ];
+
+    public function children()
+    {
+        return $this->hasMany(ToDoItem::class, 'parent');
+    }
 }

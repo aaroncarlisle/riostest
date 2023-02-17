@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer('prev')->nullable();
             $table->integer('next')->nullable();
             $table->boolean('complete');
+            $table->integer('parent')->nullable();
             $table->timestamps();
         });
     }

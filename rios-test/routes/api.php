@@ -24,5 +24,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::middleware('api')->group(function () {
     Route::resource('item', ToDoItemController::class);
     Route::patch('/item/swap/{id1}/{id2}', [ToDoItemController::class, 'swap']);
+    Route::patch('/item/makechild/{id1}/{id2}', [ToDoItemController::class, 'makechild']);
 });
 

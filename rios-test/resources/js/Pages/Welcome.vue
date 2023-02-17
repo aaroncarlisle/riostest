@@ -20,7 +20,13 @@ defineProps({
        </div>
        <ol>
          <li v-for="item in items">
-           <ToDoItem :item="item" v-on:refresh="getItems" />
+           <ToDoItem :item="item" v-on:refresh="getItems">
+             <ul class="indent">
+               <li v-for="child in item.children">
+                 <ToDoItem :item="child" v-on:refresh="getItems" />
+               </li>
+             </ul>
+           </ToDoItem>
          </li>
        </ol>
     </div>
@@ -89,5 +95,8 @@ input {
 }
 .adddiv {
   margin-bottom: 10px;
+}
+.indent {
+  margin-left: 10px;
 }
 </style>

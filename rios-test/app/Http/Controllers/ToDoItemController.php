@@ -16,6 +16,7 @@ class ToDoItemController extends Controller
     public function index()
     {
         //$items = ToDoItem::all();
+        /*
         $items = [];
         $item = ToDoItem::where('prev', null)->first();
         while ($item) {
@@ -23,6 +24,10 @@ class ToDoItemController extends Controller
             $item = ToDoItem::where('id', $item->next)->first();
         }
         return response()->json($items);
+         */
+        $items = ToDoItem::where('parent', null)->get();
+        $items->load('children');
+        return $items;
     }
 
     /**
@@ -128,6 +133,36 @@ class ToDoItemController extends Controller
         ToDoItem::where('id', $id2)->update([
             'prev' => $item1->prev,
             'next' => $item1->id
+        ]);
+
+        return response()->json([
+            'message' => 'success'
+        ]);
+    }
+
+    public function makechild($parentId, $newChildId) {
+        $newChild = ToDoItem::where('id', $newChildId)->first();
+
+        ToDoItem::where('id', $parentId)->update([
+            'next' => $newChild->next
+        ]);
+
+        $lastChild = ToDoItem::where('parent', $parentId)
+            ->where('next', null)->first();
+
+        $lastChildId = null;
+        if ($lastChild) {
+            $lastChildId = $lastChild->id;
+            ToDoItem::where('parent', $parentId)
+                ->where('next', null)->update([
+                    'next' => $newChildId
+                ]);
+        }
+
+        ToDoItem::where('id', $newChildId)->update([
+            'parent' => $parentId,
+            'prev' => $lastChildId,
+            'next' => null
         ]);
 
         return response()->json([
