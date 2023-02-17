@@ -3,7 +3,7 @@
     <span>
       <input v-model="item.item_text" v-on:change="updateItem"/>
     </span>
-    <input type="checkbox" v-model="item.complete" v-on:change="updateItem"/>
+    <input class="checkbox" type="checkbox" v-model="item.complete" v-on:change="updateItem"/>
     <button v-on:click="moveItemUp">⇡</button>
     <button v-on:click="moveItemDown">⇣</button>
     <button v-on:click="deleteItem">-</button>

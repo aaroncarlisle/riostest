@@ -13,11 +13,10 @@ defineProps({
     <Head title="TODO - the app" />
 
      <div>
-       Hello.
-       <!-- this needs to be just a field and and add  -->
-       <!--ToDoItem :edit="true" :item="editItem" /-->
-       <div>
-         <input v-model="itemText" /> <button v-on:click="addItem">+</button>
+       <h2 class="title" >TODO - the app</h2>
+       <div class="adddiv" >
+         <input v-model="itemText" v-on:keyup.enter="addItem"/>
+         <button v-on:click="addItem">+</button>
        </div>
        <ol>
          <li v-for="item in items">
@@ -68,3 +67,27 @@ export default {
   }
 }
 </script>
+
+<style>
+button {
+  background-color: blue;
+  color: white;
+  font-size: large;
+  width: 3em;
+  border-width: 3px;
+}
+input {
+  border-width: 3px;
+}
+.checkbox {
+  padding: 10px;
+  margin: 2px;
+}
+.title {
+  margin-left: 50px;
+  margin-bottom: 10px;
+}
+.adddiv {
+  margin-bottom: 10px;
+}
+</style>
